@@ -1,0 +1,41 @@
+Aim: To implement inferencing with Bayesian Network.
+Theory:
+A Bayesian Network (also called a Bayes Net or Belief Network) is a probabilistic graphical model that
+represents a set of variables and their conditional dependencies using a directed acyclic graph (DAG).
+Inferencing (or inference) means calculating the probability of one or more variables, given the known
+values of others (called evidence).
+
+Key Features:
+Nodes = Random variables (e.g., Weather, Traffic, Alarm).
+Edges = Direct dependencies between variables.
+Each node has a Conditional Probability Table (CPT) that defines the probability of each state of the node,
+given the states of its parent nodes.
+The network represents the joint probability distribution over all variables..
+
+Applications of Bayesian Networks:
+● Medical Diagnosis: To infer the probability of diseases based on symptoms.
+● Fault Diagnosis: In complex systems like aircraft or nuclear plants. ● Decision Support
+Systems: In finance and marketing for risk assessment and decision making.
+● Gene Expression Analysis: In bioinformatics to understand the relationships between
+genes.
+
+EXAMPLE: Loan Risk Prediction.
+Objective of This Experiment
+To use a Bayesian Network to predict loan approval risk based on:
+● Job Status (Stable/Unstable)
+● Income Level (High/Low)
+● Credit Score (Good/Poor)
+● Loan Approval (Yes/No)
+Bayesian Network Structure
+
+J   I
+  C
+  L
+
+Explanation of Edges:
+1. JobStatus → CreditScore:
+A stable job increases the likelihood of a good credit score.
+2. Income → CreditScore:
+Higher income improves the chance of a good credit score.
+3. CreditScore → LoanApproval:
+A better credit score increases the probability of loan approval.

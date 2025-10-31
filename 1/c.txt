@@ -1,0 +1,52 @@
+Python Implementation
+
+# Install if not already
+!pip install pgmpy
+from pgmpy.models import DiscreteBayesianNetwork
+from pgmpy.factors.discrete import TabularCPD
+from pgmpy.inference import VariableElimination
+# Step 1: Define the structure
+model = DiscreteBayesianNetwork([
+('JobStatus', 'CreditScore'),
+('Income', 'CreditScore'),
+('CreditScore', 'LoanApproval')
+])
+# Step 2: Define the CPDs
+cpd_job = TabularCPD('JobStatus', 2, [[0.7], [0.3]]) # 0: Stable, 1: Unstable
+cpd_income = TabularCPD('Income', 2, [[0.6], [0.4]]) # 0: High, 1: Low
+cpd_credit = TabularCPD(
+variable='CreditScore', variable_card=2,
+values=[
+[0.9, 0.6, 0.5, 0.1], # P(Good | Job, Income)
+[0.1, 0.4, 0.5, 0.9] # P(Poor)
+],
+evidence=['JobStatus', 'Income'],
+evidence_card=[2, 2]
+)
+cpd_loan = TabularCPD(
+variable='LoanApproval', variable_card=2,
+values=[
+[0.95, 0.3], # P(No | CreditScore)
+[0.05, 0.7] # P(Yes)
+],
+evidence=['CreditScore'],
+evidence_card=[2]
+)
+# Step 3: Add CPDs to the model
+model.add_cpds(cpd_job, cpd_income, cpd_credit, cpd_loan)
+# Step 4: Validate model
+assert model.check_model()
+# Step 5: Inference
+inference = VariableElimination(model)
+# Query 1: What is the probability of loan approval given stable job and high income?
+result = inference.query(
+variables=['LoanApproval'],
+evidence={'JobStatus': 0, 'Income': 0}
+)
+print("Query 1 - Stable Job & High Income:\n", result)
+# Query 2: Unstable job and low income
+result2 = inference.query(
+variables=['LoanApproval'],
+evidence={'JobStatus': 1, 'Income': 1}
+)
+print("Query 2 - Unstable Job & Low Income:\n", result2)

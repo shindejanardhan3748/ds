@@ -1,0 +1,34 @@
+Objective :
+The objective of this experiment is to design and implement a cognitive text-based chatbot capable of understanding and responding to user
+queries related to Smart City Waste Management services. This includes answering questions about garbage collection schedules, missed
+pickups, complaint registrations, recycling rules, and sanitation services.
+The chatbot leverages basic Natural Language Processing (NLP) techniques to analyze and classify user input based on keyword matching,
+providing a contextually relevant response. The primary aim is to demonstrate the principles behind building a cognitive conversational
+assistant using Python, spaCy, and NLTK.
+Theoretical Background :
+1. Natural Language Processing (NLP) NLP is a branch of artificial intelligence that focuses on the interaction between computers and
+human (natural) languages. In this experiment, NLP is used to understand the user’s intent by processing text data. Techniques like
+tokenization, lemmatization, stop-word removal, and keyword matching help break down and analyze the input queries.
+2. Keyword-Based Matching The chatbot uses a rule-based approach to match important keywords from the user’s query with predefined
+intents. These intents are mapped to corresponding responses related to waste collection and management. While this method is not
+as complex as deep learning-based models, it is effective for simple domain-specific applications.
+3. spaCy spaCy is an advanced NLP library in Python used for text processing. It provides high-performance tools like tokenization, part-
+of-speech tagging, named entity recognition, and lemmatization. In this experiment, spaCy is used to normalize and preprocess user
+input, making it easier to match against stored intents.
+4. NLTK (Natural Language Toolkit) nltk is a foundational Python library for NLP tasks. It is used here for tokenization and other linguistic
+features. Its exibility makes it ideal for educational experiments and keyword-based intent classification.
+
+Libraries Used:
+spaCy: Used for lemmatization, stop word removal, and tokenization of user input.
+nltk: Used for tokenization and intent keyword comparison.
+Steps Involved
+1. Data Preparation: Define a set of predefined user intents (e.g., garbage collection, complaint status) and map them to responses.
+2. Text Preprocessing: Clean the user input using spaCy by removing stop words, punctuation, and applying lemmatization.
+3. Intent Classification: Match the processed user input to the closest predefined intent using keyword overlap.
+4. Response Generation: Return a response that corresponds to the classified intent.
+5. User Interaction: Accept user queries through a text interface and output appropriate answers.
+Expected Outcome:
+The chatbot will be able to:
+Recognize user intent from natural language input.
+Respond to queries related to waste management, such as garbage collection timings, complaint processes, and recycling rules.
+Serve as a foundation for smart city digital services and citizen engagement tools.

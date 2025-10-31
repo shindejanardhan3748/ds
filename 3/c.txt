@@ -1,0 +1,47 @@
+# ========================================
+# 📘 Experiment 3 - Cognitive Based Application
+# Acquire Knowledge Through Images
+# ========================================
+
+# Step 1: Import libraries
+from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
+from tensorflow.keras.preprocessing import image
+import numpy as np
+import matplotlib.pyplot as plt
+from google.colab import files
+import os
+
+# Step 2: Load pretrained model (acts as cognitive brain)
+model = ResNet50(weights='imagenet')
+
+# Step 3: Create internal dataset (sample image)
+!mkdir -p images
+!wget -q https://upload.wikimedia.org/wikipedia/commons/9/9a/Pug_600.jpg -O images/dog.jpg
+
+# Step 4: Function to analyze (recognize) image
+def analyze_image(img_path):
+    img = image.load_img(img_path, target_size=(224, 224))
+    x = image.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    x = preprocess_input(x)
+
+    preds = model.predict(x)
+    decoded = decode_predictions(preds, top=3)[0]
+
+    # Display image and top predictions
+    plt.imshow(plt.imread(img_path))
+    plt.axis('off')
+    plt.title("Top Predictions:\n" + "\n".join([f"{name}: {round(prob*100,2)}%" for (_, name, prob) in decoded]))
+    plt.show()
+
+# Step 5: Analyze internal dataset image
+print("Analyzing sample (internal) image: Dog 🐶")
+analyze_image('images/dog.jpg')
+
+# Step 6: Allow user to upload image
+print("\nNow upload your own image to analyze 👇")
+uploaded = files.upload()
+
+for filename in uploaded.keys():
+    print(f"\nAnalyzing your image: {filename}")
+    analyze_image(filename)

@@ -1,0 +1,50 @@
+!pip install spacy nltk
+!python -m spacy download en_core_web_sm
+#import lib
+import spacy
+import nltk
+from nltk.tokenize import word_tokenize
+nltk.download('punkt')
+# Load spaCy model
+nlp = spacy.load("en_core_web_sm")
+#Sample Query-Response Data
+sample_data = {
+"garbage collection": "Garbage is collected every Monday, Wednesday, and Friday between 7 AM and 10 AM.",
+"missed collection": "We apologize. Please register a complaint on the SmartCity app or call 1800-123-456.",
+"recycling rules": "Plastic, glass, and metal should be segregated. Organic waste goes into compost bins.",
+"complaint status": "Please provide your complaint ID to track the status.",
+"street cleaning": "Street cleaning happens daily between 5 AM and 6 AM in major areas.",
+"bulk waste disposal": "For bulk waste, contact your ward officer or use the SmartCity portal for scheduling."
+}
+#Preprocess User Input
+def preprocess_text(text):
+  doc = nlp(text.lower())
+  tokens = [token.lemma_ for token in doc if not token.is_stop and not token.is_punct]
+  return tokens
+#Intent Classification
+def classify_intent(user_input, sample_data):
+  input_tokens = preprocess_text(user_input)
+  best_match = None
+  highest_score = 0
+  for intent, response in sample_data.items():
+    intent_tokens = preprocess_text(intent)
+    common_tokens = set(input_tokens) & set(intent_tokens)
+    score = len(common_tokens)
+    if score > highest_score:
+      highest_score = score
+      best_match = intent
+  return best_match
+#Generate Response
+def generate_response(user_input):
+  intent = classify_intent(user_input, sample_data)
+  if intent:
+    return sample_data[intent]
+  else:
+    return "I'm sorry, I didn't understand your query. Please try asking differently."
+#Chatbot Interface (Console)
+print("Welcome to Smart City Waste Management Assistant! Type 'exit' to quit.")
+while True:
+  query = input("You: ")
+  if query.lower() == "exit":
+    break
+  print("Bot:", generate_response(query))
