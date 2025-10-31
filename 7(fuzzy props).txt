@@ -1,0 +1,30 @@
+Fuzzy set theory extends classical set theory by allowing degrees of membership between 0 and 1.
+In classical sets, an element either belongs (1) or does not (0).
+In fuzzy sets, elements can partially belong to a set — e.g., 0.4, 0.7, etc.
+
+2. Properties of Fuzzy Sets
+Let µA(x) and µB(x) be the membership values of an element x in sets A and B.
+
+| Property                  | Formula               | Meaning                                             |
+| ------------------------- | --------------------- | --------------------------------------------------- |
+| **Union (A ∪ B)**         | max(µA(x), µB(x))     | Combines two sets by taking the maximum membership. |
+| **Intersection (A ∩ B)**  | min(µA(x), µB(x))     | Finds the common part of both sets.                 |
+| **Complement (A′)**       | 1 − µA(x)             | Represents everything not in set A.                 |
+| **Scalar Multiplication** | k × µA(x)             | Scales membership values (0 < k ≤ 1).               |
+| **Fuzzy Sum (A + B)**     | min(1, µA(x) + µB(x)) | Adds membership degrees, capped at 1.               |
+
+3. Fuzzification
+Process of converting crisp inputs into fuzzy values using membership functions.
+Example (Temperature = 25°C):
+Cold → 0.0
+Warm → 0.5
+Hot → 0.25
+
+4. Rule Base Example
+IF Temperature is Cold → Fan Speed is Low
+IF Temperature is Warm → Fan Speed is Medium
+IF Temperature is Hot → Fan Speed is High
+
+5. Defuzzification
+Converts fuzzy output into a crisp value (e.g., fan speed).
+Common method: Centroid Method
