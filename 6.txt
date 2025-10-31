@@ -1,0 +1,17 @@
+Fuzzy membership functions are used in fuzzy logic to express how much an element belongs to a fuzzy set.
+Each value in the input space is assigned a membership degree between 0 and 1.
+They model uncertainty and gradual transitions between states — unlike classical logic which uses only 0 or 1.
+Types of Membership Functions:
+Singleton Function:
+Full membership (1) at a single point, 0 elsewhere.
+Example: Exact ripeness at index 5.
+Triangular Function:
+Defined by three points (a, b, c) forming a triangle.
+Models gradual increase and decrease in membership (e.g., from unripe to ripe).
+Trapezoidal Function:
+Similar to triangular but with a flat top (a, b, c, d).
+Represents a range with equal membership (e.g., semi-ripe fruits).
+Gaussian Function:
+Bell-shaped curve centered around mean c with width σ.
+Smooth and continuous, ideal for natural phenomena like ripeness or temperature.
+These functions enable smooth classification such as “unripe,” “semi-ripe,” or “ripe”, leading to human-like decision-making.
